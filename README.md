@@ -1,7 +1,7 @@
 # blue-team-labs1
 # Sysmon Process Creation Labs - Windows telemetry Validation
 `I deployed Sysmon, generated telemetry, analyzed process creation events, and validated parent-child execution chains`
-Date and Time: 1/11/2026, 6:29PM to 6:30PM
+#### Date and Time: 1/11/2026, 6:29PM to 6:30PM
 ## Objective:
 To validate Sysmon installation and observe process creation events using PowerShell commands.
 ## Environment:
