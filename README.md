@@ -12,15 +12,15 @@ To validate Sysmon installation and observe process creation events using PowerS
 1. Verified Sysmon service was running using `sc query sysmon64`
 2. Executed `powershell.exe`
 3. Ran commands:
-	- `whoami.exe`
-	- `ipconfig.exe`
+	- `whoami`
+	- `ipconfig`
 4. Opened Event Viewer > Sysmon Operational logs
 5. Filtered for Event ID 1 (Process Create)
 ## Results Observed:
 - Detected powershell.exe execution
 - Detected child processes:
-	- whoami.exe
-	- ipconfig.exe
+	- `whoami.exe`
+	- `ipconfig.exe`
 - Verified parent-child relationships:
 	- cmd.exe > powershell.exe > whoami.exe/ipconfig.exe
 ## Analysis:
