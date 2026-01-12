@@ -43,7 +43,7 @@ When I ran : powershell.exe, whoami, ipconfig
 	 Initial telemetry of possible intrusion activity
 `*So even though its benign, the behavior pattern is attacker-like.`
 
-##PART 2 - Why PowerShell is important in Cybersecurity
+## PART 2 - Why PowerShell is important in Cybersecurity
 
 PowerShell is:
 	Built into Windows
@@ -61,9 +61,9 @@ When :
 	ParentImage: cmd.exe
 	Image: powershell.exe
 `*Brain should go "hmm, why is powershell being launched here?"`
-####This is SIGNAL, not noise.
+#### This is SIGNAL, not noise.
 
-##PART 3 - Understanding the anatomy of my Sysmon Event
+## PART 3 - Understanding the anatomy of my Sysmon Event
 
 Image: powershell.exe
 ParentImage: cmd.exe
@@ -80,9 +80,9 @@ FIELD				WHY IT MATTERS
 -IntegrityLevel		- Privilege level
 
 `*WHO did WHAT, HOW, and from WHERE`
-####This is the CORE of Incident Triage.
+#### This is the CORE of Incident Triage.
 
-##PART 4 - Incident Triage Anatomy
+## PART 4 - Incident Triage Anatomy
 
 CONTEXT
 Ask:
@@ -96,7 +96,7 @@ if:
 	IT admin running scripts at 10AM
 	That's probably normal
 
-###PARENT-CHILD RELATIONSHIP
+### PARENT-CHILD RELATIONSHIP
 	- Abnormal chain
 cmd.exe->powershell.exe->whoami.exe/ipconfig.exe
 *This execution chain analysis
@@ -107,14 +107,14 @@ explorer.exe->cmd.exe->powershell.exe
 winword.exe->powershell.exe
 `*Possible macro attack`
 
-###COMMAND-LINE
+### COMMAND-LINE
 *Critical
 	( powershell.exe )
 	CLEAN Command - "No obfuscation. Likely interactive"
 Example of encoded command > likely malicious
 	( powershell.exe -enc SQBFAFgAIAAoACgA.... )
 
-###USER & PRIVILEGE
+### USER & PRIVILEGE
 IntegrityLevel: Medium
 User: test_user
 
@@ -127,7 +127,7 @@ Example of high risk:
 User: SYSTEM
 IntegrityLevel: High
 
-###FREQUENCY & BEHAVIOR
+### FREQUENCY & BEHAVIOR
 - Is this happening once?
 - Or 500 times?
 - On one host or many?
@@ -135,14 +135,14 @@ IntegrityLevel: High
 One PowerShell = FINE
 PowerShell on 30 endpoints = INCIDENT
 
-##PART 5 - MAPPING
+## PART 5 - MAPPING
 
 STAGES				COMMAND
 -Initial Access		-powershell.exe
 -Discovery			-whoami
 -Discovery			-ipconfig
 
-##FRAMEWORKS: MITRE ATT&CK
+## FRAMEWORKS: MITRE ATT&CK
 -T1059: Command and Scripting Interpreter
 -T1033: Account Discovery
 -T1016: Network Configuration Discovery
