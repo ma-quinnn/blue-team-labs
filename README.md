@@ -4,6 +4,82 @@
 #### Date and Time: 1/11/2026, 6:29PM to 6:30PM
 ## Objective:
 To validate Sysmon installation and observe process creation events using PowerShell commands.
+
+### Process Create:
+`RuleName: -
+UtcTime: 2026-01-11 15:29:32.414
+ProcessGuid: {d7bf3f9e-c1dc-6963-9e3e-040000002a00}
+ProcessId: 13360
+Image: C:\Windows\System32\ipconfig.exe
+FileVersion: 10.0.26100.7309 (WinBuild.160101.0800)
+Description: IP Configuration Utility
+Product: Microsoft® Windows® Operating System
+Company: Microsoft Corporation
+OriginalFileName: ipconfig.exe
+CommandLine: "C:\Windows\system32\ipconfig.exe"
+CurrentDirectory: C:\Users\test_user\
+User: test_user
+LogonGuid: {d7bf3f9e-be7b-693e-24cb-750000000000}
+LogonId: 0x75CB24
+TerminalSessionId: 1
+IntegrityLevel: Medium
+Hashes: SHA256=AC7966280133DF541509EB0676E4B2F994BAC65E960C79415CCF9F12E17DAC5C
+ParentProcessGuid: {d7bf3f9e-c1d1-6963-9c3e-040000002a00}
+ParentProcessId: 20336
+ParentImage: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+ParentCommandLine: powershell.exe
+ParentUser: test_user`
+
+### Process Create:
+`RuleName: -
+UtcTime: 2026-01-11 15:29:28.732
+ProcessGuid: {d7bf3f9e-c1d8-6963-9d3e-040000002a00}
+ProcessId: 36624
+Image: C:\Windows\System32\whoami.exe
+FileVersion: 10.0.26100.1882 (WinBuild.160101.0800)
+Description: whoami - displays logged on user information
+Product: Microsoft® Windows® Operating System
+Company: Microsoft Corporation
+OriginalFileName: whoami.exe
+CommandLine: "C:\Windows\system32\whoami.exe"
+CurrentDirectory: C:\Users\test_user\
+User: test_user
+LogonGuid: {d7bf3f9e-be7b-693e-24cb-750000000000}
+LogonId: 0x75CB24
+TerminalSessionId: 1
+IntegrityLevel: Medium
+Hashes: SHA256=23240EF9F8B0A9A324110B1C2331DE31DC1B0E08F5359CB707E51A939AF56CD3
+ParentProcessGuid: {d7bf3f9e-c1d1-6963-9c3e-040000002a00}
+ParentProcessId: 20336
+ParentImage: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+ParentCommandLine: powershell.exe
+ParentUser: test_user`
+
+### Process Create:
+`RuleName: -
+UtcTime: 2026-01-11 15:29:21.939
+ProcessGuid: {d7bf3f9e-c1d1-6963-9c3e-040000002a00}
+ProcessId: 20336
+Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+FileVersion: 10.0.26100.5074 (WinBuild.160101.0800)
+Description: Windows PowerShell
+Product: Microsoft® Windows® Operating System
+Company: Microsoft Corporation
+OriginalFileName: PowerShell.EXE
+CommandLine: powershell.exe
+CurrentDirectory: C:\Users\test_user\
+User: test_user
+LogonGuid: {d7bf3f9e-be7b-693e-24cb-750000000000}
+LogonId: 0x75CB24
+TerminalSessionId: 1
+IntegrityLevel: Medium
+Hashes: SHA256=0FF6F2C94BC7E2833A5F7E16DE1622E5DBA70396F31C7D5F56381870317E8C46
+ParentProcessGuid: {d7bf3f9e-c11b-6963-8c3e-040000002a00}
+ParentProcessId: 3924
+ParentImage: C:\Windows\System32\cmd.exe
+ParentCommandLine: "C:\Windows\system32\cmd.exe"
+ParentUser: test_user`
+
 ## Environment:
 - OS: Windows 11
 - Tool: Sysmon
@@ -71,13 +147,18 @@ CommandLind: `powershell.exe`
 User: test_user
 IntegrityLevel: Medium
 
-Analyst Interpretation:
-`FIELD				WHY IT MATTERS
+#### Analyst Interpretation:
+FIELD				WHY IT MATTERS
+
 -Image				- What executed
+
 -ParentImage		- Who launched it
+
 -CommandLine		- How it was used
+
 -User				- Which account is involved
--IntegrityLevel		- Privilege level`
+
+-IntegrityLevel		- Privilege level
 
 `*WHO did WHAT, HOW, and from WHERE`
 #### This is the CORE of Incident Triage.
