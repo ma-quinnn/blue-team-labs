@@ -65,19 +65,19 @@ When :
 
 ## PART 3 - Understanding the anatomy of my Sysmon Event
 
-Image: powershell.exe
-ParentImage: cmd.exe
-CommandLind: powershell.exe
+Image: `powershell.exe`
+ParentImage: `cmd.exe`
+CommandLind: `powershell.exe`
 User: test_user
 IntegrityLevel: Medium
 
 Analyst Interpretation:
-FIELD				WHY IT MATTERS
+`FIELD				WHY IT MATTERS
 -Image				- What executed
 -ParentImage		- Who launched it
 -CommandLine		- How it was used
 -User				- Which account is involved
--IntegrityLevel		- Privilege level
+-IntegrityLevel		- Privilege level`
 
 `*WHO did WHAT, HOW, and from WHERE`
 #### This is the CORE of Incident Triage.
@@ -98,8 +98,8 @@ if:
 
 ### PARENT-CHILD RELATIONSHIP
 	- Abnormal chain
-cmd.exe->powershell.exe->whoami.exe/ipconfig.exe
-*This execution chain analysis
+`cmd.exe->powershell.exe->whoami.exe/ipconfig.exe`
+`*This execution chain analysis`
 Always ask: "Does this chain make sense?"
 	- Normal chain
 explorer.exe->cmd.exe->powershell.exe
@@ -109,10 +109,10 @@ winword.exe->powershell.exe
 
 ### COMMAND-LINE
 *Critical
-	( powershell.exe )
+	( `powershell.exe` )
 	CLEAN Command - "No obfuscation. Likely interactive"
 Example of encoded command > likely malicious
-	( powershell.exe -enc SQBFAFgAIAAoACgA.... )
+	( `powershell.exe -enc SQBFAFgAIAAoACgA....` )
 
 ### USER & PRIVILEGE
 IntegrityLevel: Medium
@@ -137,10 +137,10 @@ PowerShell on 30 endpoints = INCIDENT
 
 ## PART 5 - MAPPING
 
-STAGES				COMMAND
+`STAGES				COMMAND
 -Initial Access		-powershell.exe
 -Discovery			-whoami
--Discovery			-ipconfig
+-Discovery			-ipconfig`
 
 ## FRAMEWORKS: MITRE ATT&CK
 -T1059: Command and Scripting Interpreter
