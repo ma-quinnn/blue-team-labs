@@ -30,7 +30,7 @@ To validate Sysmon installation and observe process creation events using PowerS
 	- Learned to analyze parent-child relationships
 	- Validated Sysmon pipeline functionality
 
-##PART 1 - What I actually did (SOC language)
+## PART 1 - What I actually did (SOC language)
 
 When I ran : powershell.exe, whoami, ipconfig
 - I did a 3 critical things from a defender perspective:
