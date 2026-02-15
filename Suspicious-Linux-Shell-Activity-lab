@@ -1,6 +1,6 @@
 # Suspicious Linux Shell Activity (Lab-Simulated for L1)
 
-Scenario
+Scenario1
 ### Alert shows:
 sshd ---> bash ---> whoami
 sshd ---> bash ---> id
